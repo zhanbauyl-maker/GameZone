@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="kk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>QAZAQ HEROES</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,7 +19,9 @@
         <div class="subtitle">Ұлы даланың қаһармандары</div>
     </header>
 
-    <main class="heroes-page">
+    <!-- КЕЙІПКЕР ТАҢДАУ -->
+
+    <main class="heroes-page" id="heroesPage">
 
         <h1>КЕЙІПКЕРДІ ТАҢДА</h1>
 
@@ -28,8 +33,11 @@
         <div class="heroes">
 
             <div class="hero-card">
+
                 <div class="hero-icon">⚔️</div>
+
                 <h2>Қабанбай батыр</h2>
+
                 <span>⚔️ Жауынгер</span>
 
                 <div class="stats">
@@ -38,15 +46,19 @@
                     <p>🛡️ Қорғаныс <b>75</b></p>
                 </div>
 
-                <button onclick="selectHero('Қабанбай батыр')">
+                <button onclick="selectHero('Қабанбай батыр', 100, 90, 75)">
                     ТАҢДАУ
                 </button>
+
             </div>
 
 
             <div class="hero-card">
+
                 <div class="hero-icon">🛡️</div>
+
                 <h2>Бөгенбай батыр</h2>
+
                 <span>🛡️ Қорғаушы</span>
 
                 <div class="stats">
@@ -55,15 +67,19 @@
                     <p>🛡️ Қорғаныс <b>100</b></p>
                 </div>
 
-                <button onclick="selectHero('Бөгенбай батыр')">
+                <button onclick="selectHero('Бөгенбай батыр', 120, 80, 100)">
                     ТАҢДАУ
                 </button>
+
             </div>
 
 
             <div class="hero-card">
+
                 <div class="hero-icon">🐎</div>
+
                 <h2>Райымбек батыр</h2>
+
                 <span>🐎 Атты жауынгер</span>
 
                 <div class="stats">
@@ -72,15 +88,19 @@
                     <p>💨 Жылдамдық <b>100</b></p>
                 </div>
 
-                <button onclick="selectHero('Райымбек батыр')">
+                <button onclick="selectHero('Райымбек батыр', 100, 85, 100)">
                     ТАҢДАУ
                 </button>
+
             </div>
 
 
             <div class="hero-card">
+
                 <div class="hero-icon">👑</div>
+
                 <h2>Кенесары хан</h2>
+
                 <span>👑 Қолбасшы</span>
 
                 <div class="stats">
@@ -89,15 +109,19 @@
                     <p>🧠 Тактика <b>100</b></p>
                 </div>
 
-                <button onclick="selectHero('Кенесары хан')">
+                <button onclick="selectHero('Кенесары хан', 110, 90, 100)">
                     ТАҢДАУ
                 </button>
+
             </div>
 
 
             <div class="hero-card">
+
                 <div class="hero-icon">👑</div>
+
                 <h2>Абылай хан</h2>
+
                 <span>🧠 Стратег</span>
 
                 <div class="stats">
@@ -106,15 +130,19 @@
                     <p>🧠 Тактика <b>110</b></p>
                 </div>
 
-                <button onclick="selectHero('Абылай хан')">
+                <button onclick="selectHero('Абылай хан', 100, 80, 110)">
                     ТАҢДАУ
                 </button>
+
             </div>
 
 
             <div class="hero-card">
+
                 <div class="hero-icon">🧭</div>
+
                 <h2>Шоқан Уәлиханов</h2>
+
                 <span>🧭 Зерттеуші</span>
 
                 <div class="stats">
@@ -123,20 +151,129 @@
                     <p>🧠 Білім <b>120</b></p>
                 </div>
 
-                <button onclick="selectHero('Шоқан Уәлиханов')">
+                <button onclick="selectHero('Шоқан Уәлиханов', 80, 60, 120)">
                     ТАҢДАУ
                 </button>
+
             </div>
 
         </div>
 
     </main>
 
+
+    <!-- ШАЙҚАС АЛАҢЫ -->
+
+    <main class="battle-page" id="battlePage">
+
+        <h1>⚔️ ШАЙҚАС</h1>
+
+        <div class="battle">
+
+            <!-- ОЙЫНШЫ -->
+
+            <div class="fighter">
+
+                <div class="fighter-icon" id="playerIcon">
+                    ⚔️
+                </div>
+
+                <h2 id="playerName">
+                    Қабанбай батыр
+                </h2>
+
+                <div class="hp-container">
+
+                    <div
+                        class="hp"
+                        id="playerHP"
+                        style="width: 100%;">
+                    </div>
+
+                </div>
+
+                <p id="playerHPText">
+                    ❤️ 100 / 100
+                </p>
+
+            </div>
+
+
+            <div class="vs">
+                VS
+            </div>
+
+
+            <!-- ҚАРСЫЛАС -->
+
+            <div class="fighter enemy">
+
+                <div class="fighter-icon">
+                    👹
+                </div>
+
+                <h2>
+                    Қарақшы
+                </h2>
+
+                <div class="hp-container">
+
+                    <div
+                        class="hp enemy-hp"
+                        id="enemyHP"
+                        style="width: 100%;">
+                    </div>
+
+                </div>
+
+                <p id="enemyHPText">
+                    ❤️ 100 / 100
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button onclick="attack()">
+                ⚔️ ШАБУЫЛ
+            </button>
+
+            <button onclick="specialAttack()">
+                ⚡ АРНАЙЫ КҮШ
+            </button>
+
+            <button onclick="defend()">
+                🛡️ ҚОРҒАНУ
+            </button>
+
+        </div>
+
+
+        <div id="battleMessage" class="battle-message">
+            Шайқас басталды!
+        </div>
+
+
+        <button
+            class="back-button"
+            onclick="backToHeroes()">
+
+            ← КЕЙІПКЕРЛЕРГЕ ҚАЙТУ
+
+        </button>
+
+    </main>
+
+
     <footer>
         QAZAQ HEROES • GameZone
     </footer>
 
 </div>
+
 
 <script src="script.js"></script>
 
