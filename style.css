@@ -31,6 +31,9 @@ body {
     color: #d6b06a;
 }
 
+
+/* КЕЙІПКЕРЛЕР */
+
 .heroes-page {
     padding: 40px 20px;
     max-width: 1200px;
@@ -38,7 +41,8 @@ body {
     text-align: center;
 }
 
-.heroes-page h1 {
+.heroes-page h1,
+.battle-page h1 {
     font-size: 42px;
     margin-bottom: 10px;
 }
@@ -66,7 +70,6 @@ body {
 .hero-card:hover {
     transform: translateY(-7px);
     border-color: #c9963e;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 .hero-icon {
@@ -98,6 +101,9 @@ body {
     color: white;
 }
 
+
+/* БАТЫРМАЛАР */
+
 button {
     width: 100%;
     padding: 14px;
@@ -108,11 +114,102 @@ button {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 button:hover {
     background: #e0b45d;
+    transform: scale(1.02);
 }
+
+
+/* ШАЙҚАС */
+
+.battle-page {
+    display: none;
+    max-width: 1000px;
+    margin: auto;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.battle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin: 50px 0;
+}
+
+.fighter {
+    width: 300px;
+    background: rgba(255,255,255,0.07);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(201,150,62,0.4);
+}
+
+.fighter-icon {
+    font-size: 80px;
+    margin-bottom: 15px;
+}
+
+.fighter h2 {
+    margin-bottom: 20px;
+}
+
+.vs {
+    font-size: 35px;
+    font-weight: bold;
+    color: #d6b06a;
+}
+
+.hp-container {
+    width: 100%;
+    height: 22px;
+    background: #333;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 15px 0 8px;
+}
+
+.hp {
+    height: 100%;
+    width: 100%;
+    background: #35a853;
+    transition: width 0.4s;
+}
+
+.enemy-hp {
+    background: #d33;
+}
+
+.actions {
+    max-width: 700px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.battle-message {
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 700px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    color: #f0d18a;
+    font-size: 18px;
+}
+
+.back-button {
+    max-width: 300px;
+    background: transparent;
+    border: 1px solid #c9963e;
+}
+
+
+/* FOOTER */
 
 footer {
     text-align: center;
@@ -120,25 +217,50 @@ footer {
     color: #666;
 }
 
+
+/* ТЕЛЕФОН */
+
 @media (max-width: 850px) {
 
     .heroes {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .battle {
+        gap: 15px;
+    }
+
+    .fighter {
+        width: 250px;
+    }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 600px) {
 
     .heroes {
         grid-template-columns: 1fr;
     }
 
-    .heroes-page h1 {
+    .heroes-page h1,
+    .battle-page h1 {
         font-size: 30px;
     }
 
-    .logo {
-        font-size: 22px;
+    .battle {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .fighter {
+        width: 100%;
+        max-width: 330px;
+    }
+
+    .vs {
+        font-size: 25px;
+    }
+
+    .actions {
+        grid-template-columns: 1fr;
     }
 }
