@@ -1,7 +1,8 @@
-function startGame() {
-    alert("⚔️ QAZAQ HEROES ойыны басталды!");
-}
+function selectHero(heroName) {
+    localStorage.setItem("selectedHero", heroName);
 
-function showHeroes() {
-    alert("👑 Кейіпкерлер бөлімі жақында ашылады!");
+    alert(
+        "⚔️ " + heroName +
+        " таңдалды!\n\nКелесі кезеңде шайқас басталады."
+    );
 }
