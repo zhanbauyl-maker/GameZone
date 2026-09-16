@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Game Zone</title>
+    <title>QAZAQ HEROES</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,76 +12,34 @@
 <body>
 
     <div class="game">
-        <h1>🎮 GAME ZONE</h1>
 
-        <p>Нажми START и проверь свою реакцию!</p>
+        <header class="top">
+            <div class="logo">🇰🇿 QAZAQ HEROES</div>
+            <div class="subtitle">Ұлы даланың қаһармандары</div>
+        </header>
 
-        <button id="startButton">START</button>
+        <main class="menu">
 
-        <div class="game-area" id="gameArea"></div>
+            <h1>ҰЛЫ ДАЛАНЫҢ<br>ҚАҺАРМАНДАРЫ</h1>
 
-        <div class="stats">
+            <p>
+                Тарихи тұлғаларды таңда,
+                шайқастарға қатыс және өз қаһарманыңды күшейт!
+            </p>
 
-            <div class="stat">
-                <span>🎯</span>
-                <small>SCORE</small>
-                <strong id="score">0</strong>
-            </div>
-
-            <div class="stat">
-                <span>🏆</span>
-                <small>BEST</small>
-                <strong id="bestScore">0</strong>
-            </div>
-
-            <div class="stat">
-                <span>🔥</span>
-                <small>LEVEL</small>
-                <strong id="level">1</strong>
-            </div>
-
-            <div class="stat">
-                <span>⏱️</span>
-                <small>TIME</small>
-                <strong id="timer">15</strong>
-            </div>
-
-        </div>
-    </div>
-    <div class="game-over" id="gameOver">
-
-        <div class="game-over-card">
-
-            <div class="game-over-icon">🎮</div>
-
-            <h2>GAME OVER</h2>
-
-            <p>Отличная игра!</p>
-
-            <div class="results">
-
-                <div class="result">
-                    <span>SCORE</span>
-                    <strong id="finalScore">0</strong>
-                </div>
-
-                <div class="result">
-                    <span>BEST</span>
-                    <strong id="finalBest">0</strong>
-                </div>
-
-                <div class="result">
-                    <span>LEVEL</span>
-                    <strong id="finalLevel">1</strong>
-                </div>
-
-            </div>
-
-            <button id="playAgainButton">
-                PLAY AGAIN
+            <button onclick="startGame()">
+                ⚔️ ОЙЫНДЫ БАСТАУ
             </button>
 
-        </div>
+            <button class="secondary" onclick="showHeroes()">
+                👑 КЕЙІПКЕРЛЕР
+            </button>
+
+        </main>
+
+        <footer>
+            QAZAQ HEROES • GameZone
+        </footer>
 
     </div>
 
