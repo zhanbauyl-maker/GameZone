@@ -8,15 +8,11 @@ body {
     font-family: Arial, sans-serif;
     background: #111;
     color: white;
-    min-height: 100vh;
 }
 
 .game {
     min-height: 100vh;
-    background:
-        radial-gradient(circle at top, #3b2410, #111 65%);
-    display: flex;
-    flex-direction: column;
+    background: radial-gradient(circle at top, #3b2410, #111 70%);
 }
 
 .top {
@@ -35,75 +31,114 @@ body {
     color: #d6b06a;
 }
 
-.menu {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.heroes-page {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
     text-align: center;
-    padding: 30px 20px;
 }
 
-.menu h1 {
-    font-size: 48px;
-    line-height: 1.1;
-    margin-bottom: 20px;
+.heroes-page h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
 }
 
-.menu p {
-    max-width: 550px;
-    color: #ccc;
+.description {
+    color: #bbb;
+    margin-bottom: 35px;
     font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 30px;
+}
+
+.heroes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.hero-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(201,150,62,0.35);
+    border-radius: 18px;
+    padding: 25px 20px;
+    transition: 0.25s;
+}
+
+.hero-card:hover {
+    transform: translateY(-7px);
+    border-color: #c9963e;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.hero-icon {
+    font-size: 65px;
+    margin-bottom: 15px;
+}
+
+.hero-card h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.hero-card span {
+    color: #d6b06a;
+}
+
+.stats {
+    text-align: left;
+    margin: 20px 0;
+    color: #bbb;
+}
+
+.stats p {
+    margin: 9px 0;
+}
+
+.stats b {
+    float: right;
+    color: white;
 }
 
 button {
-    width: 280px;
-    padding: 17px;
-    margin: 8px;
+    width: 100%;
+    padding: 14px;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     background: #c9963e;
     color: white;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
 }
 
 button:hover {
-    transform: scale(1.04);
     background: #e0b45d;
-}
-
-button.secondary {
-    background: transparent;
-    border: 1px solid #c9963e;
 }
 
 footer {
     text-align: center;
-    padding: 20px;
-    color: #777;
+    padding: 25px;
+    color: #666;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 850px) {
+
+    .heroes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .heroes {
+        grid-template-columns: 1fr;
+    }
+
+    .heroes-page h1 {
+        font-size: 30px;
+    }
 
     .logo {
         font-size: 22px;
-    }
-
-    .menu h1 {
-        font-size: 34px;
-    }
-
-    .menu p {
-        font-size: 16px;
-    }
-
-    button {
-        width: 90%;
     }
 }
