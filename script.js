@@ -2,36 +2,33 @@ let player = {
     name: "",
     maxHP: 100,
     hp: 100,
-    power: 80,
-    defense: 70
+    power: 80
 };
 
 let enemy = {
-    hp: 100,
-    maxHP: 100
+    maxHP: 100,
+    hp: 100
 };
 
 let defending = false;
 
 
+// КЕЙІПКЕР ТАҢДАУ
 function selectHero(name, hp, power, defense) {
 
     player.name = name;
     player.maxHP = hp;
     player.hp = hp;
     player.power = power;
-    player.defense = defense;
+
+    enemy.hp = enemy.maxHP;
 
     document.getElementById("heroesPage").style.display = "none";
-
     document.getElementById("battlePage").style.display = "block";
 
     document.getElementById("playerName").textContent = name;
 
     updatePlayerHP();
-
-    enemy.hp = 100;
-
     updateEnemyHP();
 
     document.getElementById("battleMessage").textContent =
@@ -39,50 +36,51 @@ function selectHero(name, hp, power, defense) {
 }
 
 
+// ҚАРАПАЙЫМ ШАБУЫЛ
 function attack() {
 
-    if (enemy.hp <= 0 || player.hp <= 0) {
+    // Қарсылас жеңілсе, қайта шабуыл жасамау
+    if (enemy.hp <= 0) {
         return;
     }
 
-    let damage = Math.floor(
-        Math.random() * 16
-    ) + 10;
+    // 10-25 аралығында зиян
+    const damage = Math.floor(Math.random() * 16) + 10;
 
-    enemy.hp -= damage;
+    enemy.hp = enemy.hp - damage;
 
     if (enemy.hp < 0) {
         enemy.hp = 0;
     }
 
     updateEnemyHP();
+
+    if (enemy.hp === 0) {
+
+        document.getElementById("battleMessage").textContent =
+            "🏆 ЖЕҢІС! Қарсыласты жеңдің!";
+
+        return;
+    }
 
     document.getElementById("battleMessage").textContent =
         "⚔️ Сен " + damage + " зиян келтірдің!";
 
-    if (enemy.hp <= 0) {
-
-        document.getElementById("battleMessage").textContent =
-            "🏆 ЖЕҢІС! Сен қарсыласты жеңдің!";
-
-        return;
-    }
-
-    enemyAttack();
+    // Қарсыластың жауап шабуылы
+    setTimeout(enemyAttack, 700);
 }
 
 
+// АРНАЙЫ КҮШ
 function specialAttack() {
 
-    if (enemy.hp <= 0 || player.hp <= 0) {
+    if (enemy.hp <= 0) {
         return;
     }
 
-    let damage = Math.floor(
-        Math.random() * 25
-    ) + 20;
+    const damage = Math.floor(Math.random() * 21) + 20;
 
-    enemy.hp -= damage;
+    enemy.hp = enemy.hp - damage;
 
     if (enemy.hp < 0) {
         enemy.hp = 0;
@@ -90,75 +88,76 @@ function specialAttack() {
 
     updateEnemyHP();
 
-    document.getElementById("battleMessage").textContent =
-        "⚡ АРНАЙЫ КҮШ! " + damage + " зиян!";
-
-    if (enemy.hp <= 0) {
+    if (enemy.hp === 0) {
 
         document.getElementById("battleMessage").textContent =
-            "🏆 КЕРЕМЕТ! Арнайы күшпен жеңдің!";
+            "⚡ КЕРЕМЕТ! Арнайы күшпен жеңдің!";
 
         return;
     }
 
-    enemyAttack();
+    document.getElementById("battleMessage").textContent =
+        "⚡ Арнайы күш " + damage + " зиян келтірді!";
+
+    setTimeout(enemyAttack, 700);
 }
 
 
+// ҚОРҒАНУ
 function defend() {
 
-    if (enemy.hp <= 0 || player.hp <= 0) {
+    if (enemy.hp <= 0) {
         return;
     }
 
     defending = true;
 
     document.getElementById("battleMessage").textContent =
-        "🛡️ Сен қорғандың! Келесі шабуыл әлсіз болады.";
+        "🛡️ Қорғаныс іске қосылды!";
 
-    enemyAttack();
+    setTimeout(enemyAttack, 700);
 }
 
 
+// ҚАРСЫЛАСТЫҢ ШАБУЫЛЫ
 function enemyAttack() {
 
-    setTimeout(function() {
+    if (player.hp <= 0) {
+        return;
+    }
 
-        let damage = Math.floor(
-            Math.random() * 15
-        ) + 5;
+    let damage = Math.floor(Math.random() * 11) + 5;
 
-        if (defending) {
+    if (defending) {
+        damage = Math.floor(damage / 2);
+        defending = false;
+    }
 
-            damage = Math.floor(damage / 2);
+    player.hp = player.hp - damage;
 
-            defending = false;
-        }
+    if (player.hp < 0) {
+        player.hp = 0;
+    }
 
-        player.hp -= damage;
+    updatePlayerHP();
 
-        if (player.hp < 0) {
-            player.hp = 0;
-        }
+    if (player.hp === 0) {
 
-        updatePlayerHP();
+        document.getElementById("battleMessage").textContent =
+            "💀 ЖЕҢІЛІС! Қайтадан байқап көр!";
 
-        document.getElementById("battleMessage").textContent +=
-            " 👹 Қарсылас саған " + damage + " зиян келтірді!";
+        return;
+    }
 
-        if (player.hp <= 0) {
-
-            document.getElementById("battleMessage").textContent =
-                "💀 ЖЕҢІЛІС! Қайтадан байқап көр!";
-        }
-
-    }, 700);
+    document.getElementById("battleMessage").textContent +=
+        " 👹 Қарсылас " + damage + " зиян келтірді!";
 }
 
 
+// ОЙЫНШЫ HP
 function updatePlayerHP() {
 
-    let percent =
+    const percent =
         (player.hp / player.maxHP) * 100;
 
     document.getElementById("playerHP").style.width =
@@ -169,9 +168,10 @@ function updatePlayerHP() {
 }
 
 
+// ҚАРСЫЛАС HP
 function updateEnemyHP() {
 
-    let percent =
+    const percent =
         (enemy.hp / enemy.maxHP) * 100;
 
     document.getElementById("enemyHP").style.width =
@@ -182,6 +182,7 @@ function updateEnemyHP() {
 }
 
 
+// КЕЙІПКЕРЛЕРГЕ ҚАЙТУ
 function backToHeroes() {
 
     document.getElementById("battlePage").style.display =
