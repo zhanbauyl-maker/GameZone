@@ -1,3 +1,6 @@
+let level = 1;
+let xp = 0;
+let xpNeeded = 100;
 let player = {
     name: "",
     maxHP: 100,
@@ -56,10 +59,10 @@ function attack() {
     updateEnemyHP();
 
     if (enemy.hp === 0) {
-
         document.getElementById("battleMessage").textContent =
-            "🏆 ЖЕҢІС! Қарсыласты жеңдің!";
+            "🏆 ЖЕҢІС! Қарсыласты жеңдің! +100 XP";
 
+        addXP(100);
         return;
     }
 
@@ -89,13 +92,12 @@ function specialAttack() {
     updateEnemyHP();
 
     if (enemy.hp === 0) {
-
         document.getElementById("battleMessage").textContent =
-            "⚡ КЕРЕМЕТ! Арнайы күшпен жеңдің!";
+            "⚡ КЕРЕМЕТ! Арнайы күшпен жеңдің! +100 XP";
 
+        addXP(100);
         return;
     }
-
     document.getElementById("battleMessage").textContent =
         "⚡ Арнайы күш " + damage + " зиян келтірді!";
 
@@ -190,4 +192,32 @@ function backToHeroes() {
 
     document.getElementById("heroesPage").style.display =
         "block";
+}
+function addXP(amount) {
+    xp += amount;
+
+    if (xp >= xpNeeded) {
+        xp -= xpNeeded;
+        level++;
+
+        player.power += 10;
+
+        document.getElementById("battleMessage").textContent =
+            "🎉 LEVEL UP! Сен енді LEVEL " + level + " деңгейдесің!";
+    }
+
+    updateXP();
+}
+
+function updateXP() {
+    const percent = (xp / xpNeeded) * 100;
+
+    document.getElementById("xpBar").style.width =
+        percent + "%";
+
+    document.getElementById("levelText").textContent =
+        "⭐ LEVEL " + level;
+
+    document.getElementById("xpText").textContent =
+        "XP: " + xp + " / " + xpNeeded;
 }
