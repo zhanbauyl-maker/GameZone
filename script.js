@@ -44,7 +44,7 @@ function selectHero(name, hp, power, defense) {
 
     document.getElementById("battleMessage").textContent =
         "⚔️ " + name + " шайқасқа кірді!";
-}
+    }
 
 
 // =========================
