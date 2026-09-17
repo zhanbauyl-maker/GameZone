@@ -7,7 +7,10 @@ let player = {
 
 let enemy = {
     maxHP: 100,
-    hp: 100
+    hp: 100,
+    power: 15,
+    name: "Қарақшы",
+    icon: "👹"
 };
 
 let defending = false;
@@ -15,6 +18,38 @@ let defending = false;
 let level = 1;
 let xp = 0;
 let xpNeeded = 100;
+const enemies = [
+    {
+        name: "Қарақшы",
+        hp: 100,
+        power: 15,
+        icon: "👹"
+    },
+    {
+        name: "Жауынгер",
+        hp: 140,
+        power: 20,
+        icon: "⚔️"
+    },
+    {
+        name: "Басқыншы",
+        hp: 180,
+        power: 25,
+        icon: "🗡️"
+    },
+    {
+        name: "Қолбасшы",
+        hp: 230,
+        power: 30,
+        icon: "👺"
+    },
+    {
+        name: "Бас Босс",
+        hp: 300,
+        power: 40,
+        icon: "👹"
+    }
+];
 
 
 // =========================
@@ -28,7 +63,7 @@ function selectHero(name, hp, power, defense) {
     player.hp = hp;
     player.power = power;
 
-    enemy.hp = enemy.maxHP;
+    setEnemy();
 
     level = 1;
     xp = 0;
@@ -192,9 +227,11 @@ function addXP(amount) {
             xp -= xpNeeded;
 
             level++;
-
+            
             player.power += 10;
 
+            setEnemy();
+            
             updateXP();
 
             document.getElementById("battleMessage").textContent =
@@ -280,4 +317,29 @@ function backToHeroes() {
 
     document.getElementById("heroesPage").style.display =
         "block";
+}
+function setEnemy() {
+
+    const index = Math.min(level - 1, enemies.length - 1);
+
+    const data = enemies[index];
+
+    enemy.name = data.name;
+    enemy.maxHP = data.hp;
+    enemy.hp = data.hp;
+    enemy.power = data.power;
+    enemy.icon = data.icon;
+
+    const enemyName = document.getElementById("enemyName");
+    const enemyIcon = document.getElementById("enemyIcon");
+
+    if (enemyName) {
+        enemyName.textContent = enemy.name;
+    }
+
+    if (enemyIcon) {
+        enemyIcon.textContent = enemy.icon;
+    }
+
+    updateEnemyHP();
 }
