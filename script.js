@@ -180,21 +180,28 @@ function addXP(amount) {
 
     xp += amount;
 
+    document.getElementById("battleMessage").textContent =
+        "🏆 ЖЕҢІС! +" + amount + " XP";
+
     updateXP();
 
-    if (xp >= xpNeeded) {
+    setTimeout(function() {
 
-        xp -= xpNeeded;
+        if (xp >= xpNeeded) {
 
-        level++;
+            xp -= xpNeeded;
 
-        player.power += 10;
+            level++;
 
-        updateXP();
+            player.power += 10;
 
-        document.getElementById("battleMessage").textContent =
-            "🎉 LEVEL UP! LEVEL " + level + "! Күш +10 ⚔️";
-    }
+            updateXP();
+
+            document.getElementById("battleMessage").textContent =
+                "🎉 LEVEL UP! LEVEL " + level + "! Күш +10 ⚔️";
+        }
+
+    }, 1200);
 }
 
 
