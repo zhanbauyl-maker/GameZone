@@ -1,6 +1,3 @@
-let level = 1;
-let xp = 0;
-let xpNeeded = 100;
 let player = {
     name: "",
     maxHP: 100,
@@ -15,8 +12,15 @@ let enemy = {
 
 let defending = false;
 
+let level = 1;
+let xp = 0;
+let xpNeeded = 100;
 
+
+// =========================
 // КЕЙІПКЕР ТАҢДАУ
+// =========================
+
 function selectHero(name, hp, power, defense) {
 
     player.name = name;
@@ -26,6 +30,9 @@ function selectHero(name, hp, power, defense) {
 
     enemy.hp = enemy.maxHP;
 
+    level = 1;
+    xp = 0;
+
     document.getElementById("heroesPage").style.display = "none";
     document.getElementById("battlePage").style.display = "block";
 
@@ -33,24 +40,24 @@ function selectHero(name, hp, power, defense) {
 
     updatePlayerHP();
     updateEnemyHP();
+    updateXP();
 
     document.getElementById("battleMessage").textContent =
         "⚔️ " + name + " шайқасқа кірді!";
 }
 
 
-// ҚАРАПАЙЫМ ШАБУЫЛ
+// =========================
+// ҚАЛЫПТЫ ШАБУЫЛ
+// =========================
+
 function attack() {
 
-    // Қарсылас жеңілсе, қайта шабуыл жасамау
-    if (enemy.hp <= 0) {
-        return;
-    }
+    if (enemy.hp <= 0 || player.hp <= 0) return;
 
-    // 10-25 аралығында зиян
     const damage = Math.floor(Math.random() * 16) + 10;
 
-    enemy.hp = enemy.hp - damage;
+    enemy.hp -= damage;
 
     if (enemy.hp < 0) {
         enemy.hp = 0;
@@ -59,31 +66,33 @@ function attack() {
     updateEnemyHP();
 
     if (enemy.hp === 0) {
+
         document.getElementById("battleMessage").textContent =
-            "🏆 ЖЕҢІС! Қарсыласты жеңдің! +100 XP";
+            "🏆 ЖЕҢІС! +100 XP";
 
         addXP(100);
+
         return;
     }
 
     document.getElementById("battleMessage").textContent =
         "⚔️ Сен " + damage + " зиян келтірдің!";
 
-    // Қарсыластың жауап шабуылы
     setTimeout(enemyAttack, 700);
 }
 
 
+// =========================
 // АРНАЙЫ КҮШ
+// =========================
+
 function specialAttack() {
 
-    if (enemy.hp <= 0) {
-        return;
-    }
+    if (enemy.hp <= 0 || player.hp <= 0) return;
 
     const damage = Math.floor(Math.random() * 21) + 20;
 
-    enemy.hp = enemy.hp - damage;
+    enemy.hp -= damage;
 
     if (enemy.hp < 0) {
         enemy.hp = 0;
@@ -92,12 +101,15 @@ function specialAttack() {
     updateEnemyHP();
 
     if (enemy.hp === 0) {
+
         document.getElementById("battleMessage").textContent =
-            "⚡ КЕРЕМЕТ! Арнайы күшпен жеңдің! +100 XP";
+            "⚡ КЕРЕМЕТ! +100 XP";
 
         addXP(100);
+
         return;
     }
+
     document.getElementById("battleMessage").textContent =
         "⚡ Арнайы күш " + damage + " зиян келтірді!";
 
@@ -105,12 +117,13 @@ function specialAttack() {
 }
 
 
+// =========================
 // ҚОРҒАНУ
+// =========================
+
 function defend() {
 
-    if (enemy.hp <= 0) {
-        return;
-    }
+    if (enemy.hp <= 0 || player.hp <= 0) return;
 
     defending = true;
 
@@ -121,21 +134,24 @@ function defend() {
 }
 
 
+// =========================
 // ҚАРСЫЛАСТЫҢ ШАБУЫЛЫ
+// =========================
+
 function enemyAttack() {
 
-    if (player.hp <= 0) {
-        return;
-    }
+    if (player.hp <= 0 || enemy.hp <= 0) return;
 
     let damage = Math.floor(Math.random() * 11) + 5;
 
     if (defending) {
+
         damage = Math.floor(damage / 2);
+
         defending = false;
     }
 
-    player.hp = player.hp - damage;
+    player.hp -= damage;
 
     if (player.hp < 0) {
         player.hp = 0;
@@ -156,7 +172,66 @@ function enemyAttack() {
 }
 
 
-// ОЙЫНШЫ HP
+// =========================
+// XP ҚОСУ
+// =========================
+
+function addXP(amount) {
+
+    xp += amount;
+
+    updateXP();
+
+    if (xp >= xpNeeded) {
+
+        xp -= xpNeeded;
+
+        level++;
+
+        player.power += 10;
+
+        updateXP();
+
+        document.getElementById("battleMessage").textContent =
+            "🎉 LEVEL UP! LEVEL " + level + "! Күш +10 ⚔️";
+    }
+}
+
+
+// =========================
+// XP КӨРСЕТУ
+// =========================
+
+function updateXP() {
+
+    const percent = (xp / xpNeeded) * 100;
+
+    const xpBar = document.getElementById("xpBar");
+
+    if (xpBar) {
+        xpBar.style.width = percent + "%";
+    }
+
+    const levelText = document.getElementById("levelText");
+
+    if (levelText) {
+        levelText.textContent =
+            "⭐ LEVEL " + level;
+    }
+
+    const xpText = document.getElementById("xpText");
+
+    if (xpText) {
+        xpText.textContent =
+            "XP: " + xp + " / " + xpNeeded;
+    }
+}
+
+
+// =========================
+// PLAYER HP
+// =========================
+
 function updatePlayerHP() {
 
     const percent =
@@ -170,7 +245,10 @@ function updatePlayerHP() {
 }
 
 
-// ҚАРСЫЛАС HP
+// =========================
+// ENEMY HP
+// =========================
+
 function updateEnemyHP() {
 
     const percent =
@@ -184,7 +262,10 @@ function updateEnemyHP() {
 }
 
 
+// =========================
 // КЕЙІПКЕРЛЕРГЕ ҚАЙТУ
+// =========================
+
 function backToHeroes() {
 
     document.getElementById("battlePage").style.display =
@@ -192,32 +273,4 @@ function backToHeroes() {
 
     document.getElementById("heroesPage").style.display =
         "block";
-}
-function addXP(amount) {
-    xp += amount;
-
-    if (xp >= xpNeeded) {
-        xp -= xpNeeded;
-        level++;
-
-        player.power += 10;
-
-        document.getElementById("battleMessage").textContent =
-            "🎉 LEVEL UP! Сен енді LEVEL " + level + " деңгейдесің!";
-    }
-
-    updateXP();
-}
-
-function updateXP() {
-    const percent = (xp / xpNeeded) * 100;
-
-    document.getElementById("xpBar").style.width =
-        percent + "%";
-
-    document.getElementById("levelText").textContent =
-        "⭐ LEVEL " + level;
-
-    document.getElementById("xpText").textContent =
-        "XP: " + xp + " / " + xpNeeded;
 }
