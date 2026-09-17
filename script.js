@@ -377,3 +377,25 @@ function setEnemy() {
 
     updateEnemyHP();
 }
+function startLevel(stage) {
+
+    currentStage = stage;
+
+    const enemyData = enemies[stage - 1];
+
+    enemy.name = enemyData.name;
+    enemy.maxHP = enemyData.hp;
+    enemy.hp = enemyData.hp;
+    enemy.power = enemyData.power;
+
+    document.getElementById("enemyName").textContent = enemyData.name;
+    document.getElementById("enemyIcon").textContent = enemyData.icon;
+
+    document.getElementById("mapPage").style.display = "none";
+    document.getElementById("battlePage").style.display = "block";
+
+    updateEnemyHP();
+
+    document.getElementById("battleMessage").textContent =
+        "⚔️ " + enemyData.name + " қарсы шайқас басталды!";
+}
