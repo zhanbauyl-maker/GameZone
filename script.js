@@ -228,11 +228,9 @@ function addXP(amount) {
             xp -= xpNeeded;
 
             level++;
-            
+
             player.power += 10;
 
-            setEnemy();
-            
             updateXP();
 
             document.getElementById("battleMessage").textContent =
@@ -354,12 +352,19 @@ function startLevel(stage) {
     enemy.maxHP = enemyData.hp;
     enemy.hp = enemyData.hp;
     enemy.power = enemyData.power;
+    enemy.icon = enemyData.icon;
 
-    document.getElementById("enemyName").textContent = enemyData.name;
-    document.getElementById("enemyIcon").textContent = enemyData.icon;
+    document.getElementById("enemyName").textContent =
+        enemyData.name;
 
-    document.getElementById("mapPage").style.display = "none";
-    document.getElementById("battlePage").style.display = "block";
+    document.getElementById("enemyIcon").textContent =
+        enemyData.icon;
+
+    document.getElementById("mapPage").style.display =
+        "none";
+
+    document.getElementById("battlePage").style.display =
+        "block";
 
     updateEnemyHP();
 
