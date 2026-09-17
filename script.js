@@ -108,6 +108,8 @@ function attack() {
 
         addXP(100);
 
+        unlockLevel(currentStage + 1);
+
         return;
     }
 
@@ -142,6 +144,8 @@ function specialAttack() {
             "⚡ КЕРЕМЕТ! +100 XP";
 
         addXP(100);
+
+        unlockLevel(currentStage + 1);
 
         return;
     }
@@ -370,4 +374,19 @@ function startLevel(stage) {
 
     document.getElementById("battleMessage").textContent =
         "⚔️ " + enemyData.name + " қарсы шайқас басталды!";
+}
+function unlockLevel(stage) {
+
+    const nextLevel = document.getElementById("level" + stage);
+
+    if (!nextLevel) return;
+
+    nextLevel.classList.remove("locked");
+
+    const button = nextLevel.querySelector("button");
+
+    if (button) {
+        button.disabled = false;
+        button.textContent = "БАСТАУ";
+    }
 }
