@@ -52,39 +52,6 @@ let defending = false;
 let level = 1;
 let xp = 0;
 let xpNeeded = 100;
-const enemies = [
-    {
-        name: "Қарақшы",
-        hp: 100,
-        power: 15,
-        icon: "👹"
-    },
-    {
-        name: "Жауынгер",
-        hp: 140,
-        power: 20,
-        icon: "⚔️"
-    },
-    {
-        name: "Басқыншы",
-        hp: 180,
-        power: 25,
-        icon: "🗡️"
-    },
-    {
-        name: "Қолбасшы",
-        hp: 230,
-        power: 30,
-        icon: "👺"
-    },
-    {
-        name: "Бас Босс",
-        hp: 300,
-        power: 40,
-        icon: "👹"
-    }
-];
-
 
 // =========================
 // КЕЙІПКЕР ТАҢДАУ
@@ -103,7 +70,7 @@ function selectHero(name, hp, power, defense) {
     xp = 0;
 
     document.getElementById("heroesPage").style.display = "none";
-    document.getElementById("battlePage").style.display = "block";
+    document.getElementById("mapPage").style.display = "block";
 
     document.getElementById("playerName").textContent = name;
 
